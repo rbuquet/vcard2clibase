@@ -17,10 +17,12 @@ public class App {
 	public final static String URL_START;
 	public final static String KEY_NAME;
 	public final static String KEY_TEL;
+	public final static String ENCODING;
 	static {
 		URL_START = System.getProperty("URL_START");
 		KEY_NAME = System.getProperty("KEY_NAME");
 		KEY_TEL = System.getProperty("KEY_TEL");
+		ENCODING = System.getProperty("ENCODING", "ISO-8859-15");
 	}
 	public static void main(String[] args) throws Exception {
 		vcard2clibase(System.in, System.out);
@@ -39,13 +41,13 @@ public class App {
 					List<Telephone> telephoneNumbers = vcard.getTelephoneNumbers();
 					for (Telephone telephoneNumber : telephoneNumbers) {
 						System.err.println("URL pour " + telephoneNumber.getText() + " (" + (fullName == null ? "sans nom" : fullName) + ")");
-						String getRequestStr = URL_START + (fullName == null ? "" : "&" + KEY_NAME + "=" + URLEncoder.encode(fullName, "UTF-8")) + "&" + KEY_TEL + "=" + URLEncoder.encode(
+						String getRequestStr = URL_START + (fullName == null ? "" : "&" + KEY_NAME + "=" + URLEncoder.encode(fullName, ENCODING)) + "&" + KEY_TEL + "=" + URLEncoder.encode(
 							telephoneNumber
 							.getText()
 							.replaceAll("\\s*", "")
 							.replaceAll("\\(.*\\)", "")
 							.replaceAll("\\+", "00")
-						, "UTF-8");
+						, ENCODING);
 						out.println(getRequestStr);
 					}
 				} catch (Exception e) {
