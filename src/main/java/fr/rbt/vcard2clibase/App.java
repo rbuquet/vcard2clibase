@@ -11,7 +11,7 @@ import ezvcard.property.Telephone;
 
 /**
  * À utiliser en mode flux UNIX, comme par exemple :
- * cat ~/Downloads/contacts.vcf | java -DURL_START="http://blahost/toto?aa=bb" -DKEY_NAME=NOM -DKEY_TEL=TELEPHON -jar target/vcard2clibase-1.0-SNAPSHOT.jar | xargs -L 1 curl
+ * cat contacts.vcf | java -DURL_START="http://192.168.1.19/listes.htm?tl=B&act=A&type=B" -DKEY_NAME=nom -DKEY_TEL=num -jar vcard2clibase.jar | xargs -L 1 curl
  */
 public class App {
 	public final static String URL_START;
